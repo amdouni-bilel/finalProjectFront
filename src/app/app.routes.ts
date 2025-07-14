@@ -80,14 +80,19 @@ export const appRoutes: Route[] = [
             initialData: initialDataResolver
         },
         children: [
+// 
+                  {path: 'list-users', loadChildren: () => import('app/modules/ipfp/components/users/list-users/list-users-components.routes')},
+                  {path: 'add-user', loadChildren: () => import('app/modules/ipfp/components/users/add-user/add-user-components.routes')},
+                  {path: 'list-tasks', loadChildren: () => import('app/modules/ipfp/components/tasks/list-tasks/list-tasks-components.routes')},
+                  {path: 'add-task', loadChildren: () => import('app/modules/ipfp/components/tasks/add-task/add-tasks-components.routes')},
 
+            
             // Dashboards
             {path: 'dashboards', children: [
                 {path: 'project', loadChildren: () => import('app/modules/admin/dashboards/project/project.routes')},
                 {path: 'analytics', loadChildren: () => import('app/modules/admin/dashboards/analytics/analytics.routes')},
                 {path: 'finance', loadChildren: () => import('app/modules/admin/dashboards/finance/finance.routes')},
                 {path: 'crypto', loadChildren: () => import('app/modules/admin/dashboards/crypto/crypto.routes')},
-                {path: 'test', loadChildren: () => import('app/modules/ipfp/test/test-components.routes')},
                 ]},
 
             // Apps

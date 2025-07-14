@@ -78,38 +78,24 @@ else
     defaultMenu= [
         {
             id: 'dashboards',
-            title: 'Dashboards',
-            subtitle: 'Unique dashboard ',
+            title: 'Bloc Notes',
+            subtitle: 'Mes notes',
             type: 'group',
             icon: 'heroicons_outline:home',
             children: [
                 {
-                    id: 'dashboards.project',
-                    title: 'Project',
+                    id: 'dashboards.notes',
+                    title: 'Taches',
                     type: 'basic',
                     icon: 'heroicons_outline:clipboard-document-check',
-                    link: '/dashboards/project',
-                },
-                {
-                    id: 'dashboards.analytics',
-                    title: 'Missions',
-                    type: 'basic',
-                    icon: 'heroicons_outline:chart-pie',
-                    link: '/dashboards/analytics',
+                    link: '/list-tasks',
                 },
                 {
                     id: 'dashboards.finance',
-                    title: 'Finance',
+                    title: 'Utilisateurs',
                     type: 'basic',
-                    icon: 'heroicons_outline:banknotes',
-                    link: '/dashboards/finance',
-                },
-                {
-                    id: 'dashboards.finance',
-                    title: 'crypto',
-                    type: 'basic',
-                    icon: 'heroicons_outline:banknotes',
-                    link: '/dashboards/crypto',
+                    icon: 'heroicons_outline:user-group',
+                    link: '/list-users',
                 }
             ],
         },
@@ -381,7 +367,6 @@ else
 
             ],
         },
-
         {
             id: 'docs',
             title: 'docs',
