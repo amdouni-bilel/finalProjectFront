@@ -99,7 +99,7 @@ else
                 }
             ],
         },
-        {
+    /*    {
             id: 'apps',
             title: 'Apps',
             subtitle: 'Apps',
@@ -385,7 +385,7 @@ else
 
 
             ],
-        }
+        }*/
 
     ];
 }

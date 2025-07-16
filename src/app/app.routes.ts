@@ -85,6 +85,7 @@ export const appRoutes: Route[] = [
                   {path: 'add-user', loadChildren: () => import('app/modules/ipfp/components/users/add-user/add-user-components.routes')},
                   {path: 'list-tasks', loadChildren: () => import('app/modules/ipfp/components/tasks/list-tasks/list-tasks-components.routes')},
                   {path: 'add-task', loadChildren: () => import('app/modules/ipfp/components/tasks/add-task/add-tasks-components.routes')},
+                  { path: 'update-user/:id', loadChildren: () => import('app/modules/ipfp/components/users/update-user/update-user-components.routes') },
 
             
             // Dashboards

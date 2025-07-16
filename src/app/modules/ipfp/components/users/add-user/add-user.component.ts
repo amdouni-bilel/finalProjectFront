@@ -1,37 +1,70 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {Router, RouterLink} from '@angular/router';
-//import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../../service/user.service';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {formatDate, NgIf} from '@angular/common';
-import {MatIcon} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatSelectModule} from "@angular/material/select";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import {UserService} from "../../../service/user.service";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
   imports: [
-    MatIcon,
-    MatButtonModule,
+    CommonModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule,
-    MatSelectModule,
+    MatButtonModule,
     MatCheckboxModule,
-    ReactiveFormsModule,
+    MatSnackBarModule,
     RouterLink,
-    MatDialogModule,
-    NgIf
+    MatIconModule
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss'
 })
-export class AddUserComponent {
+export class AddUserComponent implements OnInit {
+  userForm!: FormGroup;
 
+  constructor(
+      private fb: FormBuilder,
+      private userService: UserService,
+      private router: Router,
+      private snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit(): void {
+    this.userForm = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
+
+  save(): void {
+    if (this.userForm.invalid)
+      return;
+
+    this.userService.addUser(this.userForm.value).subscribe({
+      next: (user) => {
+        this.snackBar.open('Utilisateur ajouté avec succès.', 'Fermer', {
+          duration: 3000
+        });
+        this.router.navigate(['/list-users']); // rediriger vers la liste après ajout
+      },
+      error: (err) => {
+        console.error('Erreur lors de l’ajout', err);
+        this.snackBar.open(`Erreur lors de l’ajout de l’utilisateur.`, 'Fermer', {
+          duration: 3000
+        });
+      }
+    });
+  }
+
+  reset(): void {
+    this.userForm.reset();
+  }
 }
